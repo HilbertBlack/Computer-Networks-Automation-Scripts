@@ -4,8 +4,8 @@
 #include<unistd.h>
 #include<arpa/inet.h>
 #include<string.h>
-
-
+#include<string.h>
+#include"evaluate.c"
 
 int main()
 {
@@ -22,10 +22,28 @@ int main()
     	servaddr.sin_port=htons(1025);			
     	servaddr.sin_addr.s_addr=inet_addr("127.0.0.1");
 
+//	struct sockaddr_in clientaddr;
+
+//	clientaddr.sin_family=AF_INET;
+//      clientaddr.sin_port=htons(5001);
+//      clientaddr.sin_addr.s_addr=inet_addr("127.0.0.1");
+
+/*
 
 	int opt=1;
-	setsockopt(sockdesc, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+	setsockopt(sockdesc,SOL_SOCKET,SO_REUSEADDR,&opt,sizeof(opt));
 
+	while(bind(sockdesc,(struct sockaddr *)&clientaddr,sizeof(clientaddr)) < 0)	
+	{
+		printf("wait");
+	}
+	{
+		printf("binded successfully\n");
+	}
+*/
+
+	evalute(sockdesc,servaddr,2,1);
+	
 	if (connect(sockdesc,(struct sockaddr*)&servaddr,sizeof(servaddr)) < 0)
 	{
 		printf("Connect Failed");
